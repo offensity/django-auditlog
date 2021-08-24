@@ -280,6 +280,9 @@ class LogEntry(models.Model):
     additional_data = JSONField(
         blank=True, null=True, verbose_name=_("additional data")
     )
+    additional_request_data = JSONField(
+        blank=True, null=True, verbose_name=_("additional request data")
+    )
 
     objects = LogEntryManager()
 

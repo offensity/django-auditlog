@@ -41,10 +41,11 @@ class LogEntryAdmin(admin.ModelAdmin, LogEntryAdminMixin):
         FieldFilter,
         ("timestamp", get_timestamp_filter()),
     ]
-    readonly_fields = ["created", "resource_url", "action", "user_url", "msg"]
+    readonly_fields = ["created", "resource_url", "action", "user_url", "msg", "remote_addr", "additional_data", "additional_request_data"]
     fieldsets = [
         (None, {"fields": ["created", "user_url", "resource_url"]}),
         ("Changes", {"fields": ["action", "msg"]}),
+        ("Additional info", {"fields": ["remote_addr", "additional_data", "additional_request_data"]})
     ]
     list_select_related = ["actor", "content_type"]
     show_full_result_count = False

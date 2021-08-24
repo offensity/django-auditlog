@@ -1,6 +1,8 @@
 import contextlib
 
 from auditlog.context import set_actor
+from django.conf import settings
+from django.utils.module_loading import import_string
 
 
 @contextlib.contextmanager
@@ -27,7 +29,13 @@ class AuditlogMiddleware(object):
             remote_addr = request.META.get("REMOTE_ADDR")
 
         if hasattr(request, "user") and request.user.is_authenticated:
-            context = set_actor(actor=request.user, remote_addr=remote_addr)
+            additional_request_data = None
+            get_additional_request_data = getattr(settings, "AUDITLOG_GET_ADDITIONAL_REQUEST_DATA", None)
+            if get_additional_request_data:
+                get_additional_request_data = import_string(get_additional_request_data)
+                additional_request_data = get_additional_request_data(request)
+
+            context = set_actor(actor=request.user, remote_addr=remote_addr, additional_request_data=additional_request_data)
         else:
             context = nullcontext()
 
