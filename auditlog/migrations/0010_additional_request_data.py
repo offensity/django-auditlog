@@ -12,6 +12,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="logentry",
             name="additional_request_data",
-            field=jsonfield.fields.JSONField(null=True, blank=True),
+            field=jsonfield.fields.JSONField(null=True, blank=True, verbose_name='additional request data'),
         )
     ]
