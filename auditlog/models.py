@@ -274,7 +274,7 @@ class LogEntry(models.Model):
     additional_data = models.JSONField(
         blank=True, null=True, verbose_name=_("additional data")
     )
-    additional_request_data = JSONField(
+    additional_request_data = models.JSONField(
         blank=True, null=True, verbose_name=_("additional request data")
     )
 
