@@ -34,7 +34,6 @@ def set_actor(actor, remote_addr=None, additional_request_data=None):
 
     try:
         yield
-
     finally:
         try:
             auditlog = threadlocal.auditlog
