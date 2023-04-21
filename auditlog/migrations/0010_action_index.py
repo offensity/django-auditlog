@@ -4,7 +4,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("auditlog", "0009_timestamp_id_index"),
+        ("auditlog", "0010_additional_request_data"),
     ]
 
     operations = [
