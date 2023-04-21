@@ -5,16 +5,10 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 
-@contextlib.contextmanager
-def nullcontext():
-    """Equivalent to contextlib.nullcontext(None) from Python 3.7."""
-    yield
-
-
-class AuditlogMiddleware(object):
+class AuditlogMiddleware:
     """
-    Middleware to couple the request's user to log items. This is accomplished by currying the signal receiver with the
-    user from the request (or None if the user is not authenticated).
+    Middleware to couple the request's user to log items. This is accomplished by currying the
+    signal receiver with the user from the request (or None if the user is not authenticated).
     """
 
     def __init__(self, get_response=None):
@@ -37,7 +31,7 @@ class AuditlogMiddleware(object):
 
             context = set_actor(actor=request.user, remote_addr=remote_addr, additional_request_data=additional_request_data)
         else:
-            context = nullcontext()
+            context = contextlib.nullcontext()
 
         with context:
             return self.get_response(request)

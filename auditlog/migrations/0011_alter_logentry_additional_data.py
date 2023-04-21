@@ -4,13 +4,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("auditlog", "0003_logentry_remote_addr"),
+        ("auditlog", "0010_action_index"),
     ]
 
     operations = [
-        migrations.AddField(
+        migrations.AlterField(
             model_name="logentry",
             name="additional_data",
-            field=models.JSONField(null=True, blank=True),
+            field=models.JSONField(
+                blank=True, null=True, verbose_name="additional data"
+            ),
         ),
     ]
